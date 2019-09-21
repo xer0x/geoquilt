@@ -1,0 +1,20 @@
+{
+  "name": "geoquilt",
+  "version": "1.0.0",
+  "description": "Geocoding exercise",
+  "scripts": {
+    "build": "rm -rf public && mkdir public && cp ./site/index.html ./public/index.html",
+    "test": "tape tests/*",
+    "deploy": "now",
+    "start": "now dev"
+  },
+  "devDependencies": {
+    "now": "^16.2.0",
+    "tape": "^4.11.0"
+  },
+  "dependencies": {
+    "google-geocoder": "^0.2.1"
+  },
+  "author": "Drew Miller",
+  "license": "ISC"
+}
