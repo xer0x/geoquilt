@@ -52,7 +52,7 @@ test('should find the statue of liberty', async function (assert) {
     const {geocode} = geocoder(api_key)
     const response = await geocode('the statue of liberty')
     assert.ok(response)
-    assert.equal(response.length, 1, 'should on know 1 location for the statue')
+    assert.equal(response.length, 1, 'should on know 1 location for the statue of liberty')
   } catch (e) {
     assert.ifError(e)
   }

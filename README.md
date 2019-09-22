@@ -4,7 +4,7 @@ This is a simple exmaple of an API that looks up geo-cordinates of locations, an
 
 ## Design choices
 
-- Geocoding uses the Google Maps API because it is easy to setup. The npm module google-geocoder works, but has security problems because it has quite ancient dependencies. I haven't written my own API client, but I might  want to.
+- Geocoding uses the Google Maps API because it is easy to setup. The npm module works, but I might want to build something different because Github mentions some security issues.
 - Deployment uses Zeit similarly because it is fast to get a basic API running.
 
 ## Setup
