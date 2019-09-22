@@ -4,15 +4,23 @@
   "description": "Geocoding exercise",
   "scripts": {
     "build": "rm -rf public && mkdir public && cp ./site/index.html ./public/index.html",
+    "env": "export $(cat .env | xargs) && env",
     "test": "tape tests/*",
+    "test2": "tape tests/* | faucet",
+    "test3": "tape tests/* | tap-simple",
+    "test4": "tape tests/* | tap-spec",
     "deploy": "now",
     "start": "now dev"
   },
   "devDependencies": {
+    "faucet": "^0.0.1",
     "now": "^16.2.0",
+    "tap-simple": "^0.3.1",
+    "tap-spec": "^5.0.0",
     "tape": "^4.11.0"
   },
   "dependencies": {
+    "dotenv": "^8.1.0",
     "google-geocoder": "^0.2.1"
   },
   "author": "Drew Miller",
