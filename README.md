@@ -7,6 +7,16 @@ This is a simple exmaple of an API that looks up geo-cordinates of locations, an
 - Geocoding uses the Google Maps API because it is easy to setup. The npm module works, but I might want to build something different because Github mentions some security issues.
 - Deployment uses Zeit similarly because it is fast to get a basic API running.
 
+## Usage
+
+```shell
+
+$ JSON='{"locations": [{"name": "Statue of Liberty", {"name": "Miami, FL"}]}'
+
+$ curl -X POST localhost:3000/api/locations -d "$JSON" -H "Content-Type: application/json"
+
+```
+
 ## Setup
 
 To run this, you will need to install Zeit Now. 

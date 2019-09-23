@@ -36,7 +36,8 @@ const {findClosestLocations} = require('../lib')
  */
 module.exports = async (req, res) => {
   try {
-    const {locations} = json.parse(req.body)
+    if (!req.body) throw new Error('missing request body -- expected json')
+    const {locations} = req.body
     const result = await findClosestLocations(locations)
     res.status(200).json(result)
   } catch (e) {

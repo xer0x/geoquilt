@@ -5,7 +5,7 @@
   "routes": [
     {
       "src": "/api/locations.js",
-      "methods": ['POST']
+      "methods": ["POST"]
     }
   ]
 }

@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rm -rf public && mkdir public && cp ./site/index.html ./public/index.html",
     "env": "export $(cat .env | xargs) && env",
-    "test": "tape tests/* | tap-spec",
+    "test": "tape 'tests/?*/*' | tap-spec",
     "deploy": "now",
     "start": "now dev"
   },
