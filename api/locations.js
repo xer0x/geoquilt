@@ -23,7 +23,7 @@ const {findClosestLocations} = require('../lib')
  * HTTP 200 Success:
  * {
  *   "locations": [
- *     {"name": "Statue of Liberty", "": ""},
+ *     {"name": "Statue of Liberty", "closest": ".."},
  *     ...
  *   ],
  *   "geocode_errors": []

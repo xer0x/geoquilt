@@ -58,3 +58,28 @@ test('should find the statue of liberty', async function (assert) {
   }
 
 })
+
+test('geocodeLocations should return results', async function (assert) {
+  assert.plan(6)
+
+  const locations = [
+    {name: 'The statue of liberty'},
+    {name: 'miami, fl'},
+    {name: 'nanimo, bc'}
+  ]
+
+  try {
+    const {geocodeLocations} = geocoder(api_key)
+    const result = await geocodeLocations(locations)
+
+    assert.equal(result.length, locations.length, 'number of results should match the original')
+    assert.ok('name' in result[0], 'results should contain name')
+    assert.ok('latitude' in result[0], 'results should contain latitude')
+    assert.ok('longitude' in result[0], 'results should contain longitude')
+    assert.ok('error' in result[0], 'results should contain error')
+    assert.false(result[0].error, 'should not have errors')
+  } catch (e) {
+    assert.fail(e)
+  }
+
+})
