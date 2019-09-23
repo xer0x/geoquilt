@@ -1,5 +1,11 @@
 {
   "env": {
     "GOOGLE_GEOCODER_KEY": "@google_geocoder_key"
-  }
+  },
+  "routes": [
+    {
+      "src": "/api/locations.js",
+      "methods": ['POST']
+    }
+  ]
 }

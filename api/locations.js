@@ -1,7 +1,16 @@
+/**
+ * API
+ *
+ * Zeit Now Serverless docs: https://zeit.co/docs/v2/serverless-functions/supported-languages/#node.js
+ *
+ */
 const {findClosestLocations} = require('../lib')
 
 /**
- * # POST /api/location
+ * # GET/POST /api/location
+ *
+ * Headers:
+ *   content-type: 'application/json'
  *
  * Expects the req.body to be JSON with the following format:
  *
@@ -25,14 +34,12 @@ const {findClosestLocations} = require('../lib')
  *   "error": ""
  * }
  */
-module.exports = (req, res) => {
-
+module.exports = async (req, res) => {
   try {
     const {locations} = json.parse(req.body)
-    const result = findClosestLocations(locations)
+    const result = await findClosestLocations(locations)
     res.status(200).json(result)
   } catch (e) {
     res.status(400).json({ error: e.message })
   }
-
 }
