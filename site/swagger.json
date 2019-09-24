@@ -43,13 +43,7 @@
             "description": "List of locations",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/InputLocation"
-              },
-              "example": [
-                {"name": "Statue of Liberty"}, {"name": "Chicago, IL"}, {"name": "Miami, FL"}
-              ]
+              "$ref": "#/definitions/Input"
             }
           }
         ],
@@ -57,25 +51,60 @@
           "200": {
             "description": "A list of locations.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/OutputLocation"
-              },
-              "example": [
-                {"name": "Statue of Liberty", "match": "Chicago, IL"},
-                {"name": "Chicago, IL", "match": "Statue of Liberty"},
-                {"name": "Miami, FL", "match": "Statue of Liberty"}
-              ]
+              "$ref": "#/definitions/Output"
             }
           },
           "400": {
-            "description": "Invalid input"
+            "description": "Invalid input",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "description": "Error message"
+                }
+              }
+            }
           }
         }
       }
     }
   },
   "definitions": {
+    "Input": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputLocation"
+          }
+        }
+      },
+      "example": {
+        "locations": [
+          {"name": "Statue of Liberty"}, {"name": "Chicago, IL"}, {"name": "Miami, FL"}
+        ]
+      }
+    },
+    "Output": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutputLocation"
+          }
+        }
+      },
+      "example": {
+        "locations": [
+          {"name": "Statue of Liberty", "match": "Chicago, IL"},
+          {"name": "Chicago, IL", "match": "Statue of Liberty"},
+          {"name": "Miami, FL", "match": "Statue of Liberty"}
+        ]
+      }
+    },
     "InputLocation": {
       "type": "object",
       "required": [
