@@ -39,7 +39,7 @@ module.exports = async (req, res) => {
     if (!req.body) throw new Error('missing request body -- expected json')
     const {locations} = req.body
     const result = await findClosestLocations(locations)
-    res.status(200).json(result)
+    res.status(200).json({locations: result})
   } catch (e) {
     res.status(400).json({ error: e.message })
   }

@@ -4,7 +4,7 @@ var test = require('tape')
 var {findClosestLocations}= require('../../lib/index')
 
 test('findClosestLocations should return correct results', async function (assert) {
-  assert.plan(1)
+  assert.plan(2)
 
   const locations = [
     {name: 'The statue of liberty'},
@@ -14,8 +14,8 @@ test('findClosestLocations should return correct results', async function (asser
 
   try {
     const result = await findClosestLocations(locations)
-    assert.fail(result, 'this test should always fail because it is not implemented yet')
-    //assert.notEqual(response, undefined)
+    assert.ok(result, 'should return a result')
+    assert.equal(locations.length, result.length, 'input length should match output length')
   } catch (e) {
     assert.fail(e)
   }
