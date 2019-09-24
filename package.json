@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Geocoding exercise",
   "scripts": {
-    "build": "rm -rf public && mkdir public && cp ./site/index.html ./public/index.html",
+    "build": "rm -rf public && mkdir public && cp -r ./node_modules/swagger-ui-dist/ ./public/ && sed -i '' 's,https://petstore.swagger.io/v2/swagger.json,/swagger.json,' ./public/index.html && cp -r ./site/* ./public",
     "env": "export $(cat .env | xargs) && env",
     "test": "tape 'tests/?*/*' | tap-spec",
     "deploy": "now",
@@ -17,7 +17,8 @@
   "dependencies": {
     "dotenv": "^8.1.0",
     "haversine": "^1.1.1",
-    "node-geocoder": "^3.24.0"
+    "node-geocoder": "^3.24.0",
+    "swagger-ui-dist": "^3.23.11"
   },
   "author": "Drew Miller",
   "license": "ISC"

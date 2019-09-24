@@ -1,0 +1,122 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Geoquilt",
+    "description": "Geoquilt is the best!  View the source on [Github](https://github.com/xer0x/geoquilt). Click below on *POST* `/locations` to send an example request.",
+    "contact": {
+      "name": "Geoquilt API Team"
+    },
+    "license": {
+      "name": "ISC"
+    }
+  },
+  "host": "geoquilt.xer0x.now.sh",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "locations",
+      "description": "Geocode all the things!"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/locations": {
+      "post": {
+        "tags": ["locations"],
+        "description": "Returns all the locations you give it -- with the closest location in the match field",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "List of locations",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/InputLocation"
+              },
+              "example": [
+                {"name": "Statue of Liberty"}, {"name": "Chicago, IL"}, {"name": "Miami, FL"}
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of locations.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OutputLocation"
+              },
+              "example": [
+                {"name": "Statue of Liberty", "match": "Chicago, IL"},
+                {"name": "Chicago, IL", "match": "Statue of Liberty"},
+                {"name": "Miami, FL", "match": "Statue of Liberty"}
+              ]
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "InputLocation": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name or Address of a location",
+          "example": "The Statue of Liberty"
+        }
+      }
+    },
+    "OutputLocation": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name or Address of a location",
+          "example": "The Statue of Liberty"
+        },
+        "match": {
+          "type": "string",
+          "description": "Name or Address of the nearest location in the list"
+        },
+        "error": {
+          "type": "string",
+          "description": "An error string if unable to parse the Name or Address"
+        },
+        "latitude": {
+          "type": "number",
+          "example": "40.1234"
+        },
+        "longitude": {
+          "type": "number",
+          "example": "-70.1234"
+        }
+      }
+    }
+  }
+}
