@@ -19,7 +19,7 @@ $ curl -X POST localhost:3000/api/locations -d "$JSON" -H "Content-Type: applica
 
 ```
 
-You can also use the API via the Swagger UI.
+You can also use the API via the [Geoquilt Swagger UI](https://geoquilt.xer0x.now.sh/#/locations/post_locations).
 
 ## Swagger API Docs
 
