@@ -17,6 +17,10 @@ $ curl -X POST localhost:3000/api/locations -d "$JSON" -H "Content-Type: applica
 
 ```
 
+## Swagger API Docs
+
+When the service is running Swagger API docs are available on [localhost:3000/](localhost) or Zeit Now.
+
 ## Setup
 
 To run this, you will need to install Zeit Now. 
