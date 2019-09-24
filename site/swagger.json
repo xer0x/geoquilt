@@ -3,7 +3,7 @@
   "info": {
     "version": "1.0.0",
     "title": "Geoquilt",
-    "description": "Geoquilt is the best!  View the source on [Github](https://github.com/xer0x/geoquilt). Click below on `**POST** /locations` to send an example request.",
+    "description": "Geoquilt is the best!  View the source on [Github](https://github.com/xer0x/geoquilt). Click `POST /locations` -> **'Try it out'** -> **Execute** to send an example request.",
     "contact": {
       "name": "Geoquilt API Team"
     },
