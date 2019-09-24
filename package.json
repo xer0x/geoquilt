@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Geocoding exercise",
   "scripts": {
-    "build": "rm -rf public && mkdir public && cp -r ./node_modules/swagger-ui-dist/ ./public/ && sed -i '' 's,https://petstore.swagger.io/v2/swagger.json,/swagger.json,' ./public/index.html && cp -r ./site/* ./public",
+    "xbuild": "rm -rf public && mkdir public && cp -r ./node_modules/swagger-ui-dist/ ./public/ && sed -i '' 's,https://petstore.swagger.io/v2/swagger.json,/swagger.json,' ./public/index.html && cp -r ./site/* ./public",
+    "build": "rm -rf public && mkdir public && cp -r ./node_modules/swagger-ui-dist/ ./public/ && perl -pi -e 's,https://petstore.swagger.io/v2/swagger.json,/swagger.json,' ./public/index.html && cp -r ./site/* ./public",
     "env": "export $(cat .env | xargs) && env",
     "test": "tape 'tests/?*/*' | tap-spec",
     "deploy": "now",
