@@ -84,3 +84,52 @@ test('Bruteforce matches three locations', async function (assert) {
   assert.ok('match' in matchedList[1], 'should have a match');
   assert.equal(matchedList[2].match, 'The Statue of Liberty', 'Chicago should be closer to the Statue of Liberty');
 })
+
+test('Bruteforce matches the same locations', async function (assert) {
+  assert.plan(12)
+
+  const coordinateList = [
+    {
+      name: 'The Statue of Liberty',
+      latitude: 40.6892,
+      longitude: -74.0445
+    },
+    {
+      name: 'The Statue of Liberty',
+      latitude: 40.6892,
+      longitude: -74.0445
+    },
+    {
+      name: 'The Statue of Liberty',
+      latitude: 40.6892,
+      longitude: -74.0445
+    },
+    {
+      name: 'Chicago, IL',
+      latitude: 42.065405,
+      longitude: -87.676026
+    }
+  ]
+
+  const matchedList = matcher.bruteforce(coordinateList)
+
+  // 1. Statue of Liberty results
+  assert.equal(matchedList[0].name, 'The Statue of Liberty', 'should have the name of start');
+  assert.ok('match' in matchedList[0], 'should have a match');
+  assert.equal(matchedList[0].match, 'Chicago, IL', 'Statue should be closer to Chicago than duplicate of itself');
+
+  // 2. Statue of Liberty results
+  assert.equal(matchedList[1].name, 'The Statue of Liberty', 'should have the name of start');
+  assert.ok('match' in matchedList[1], 'should have a match');
+  assert.equal(matchedList[1].match, 'Chicago, IL', 'Statue should be closer to Chicago than duplicate of itself');
+
+  // 3. Statue of Liberty results
+  assert.equal(matchedList[2].name, 'The Statue of Liberty', 'should have the name of start');
+  assert.ok('match' in matchedList[2], 'should have a match');
+  assert.equal(matchedList[2].match, 'Chicago, IL', 'Statue should be closer to Chicago than duplicate of itself');
+
+  // Chicago results
+  assert.equal(matchedList[3].name, 'Chicago, IL', 'should have the same name as input');
+  assert.ok('match' in matchedList[3], 'should have a match');
+  assert.equal(matchedList[3].match, 'The Statue of Liberty', 'Chicago should be closer to the Statue of Liberty');
+})
