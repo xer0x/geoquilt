@@ -10,7 +10,7 @@ test('findClosestLocations should return correct results', async function (asser
     {name: 'The statue of liberty'},
     {name: 'new york, ny'},
     {name: 'seattle, wa'},
-    {name: ''}
+    {name: ''},
   ]
 
   try {
