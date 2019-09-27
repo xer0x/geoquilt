@@ -85,7 +85,7 @@ test('Bruteforce matches three locations', async function (assert) {
   assert.equal(matchedList[2].match, 'The Statue of Liberty', 'Chicago should be closer to the Statue of Liberty');
 })
 
-test('Bruteforce matches the same locations', async function (assert) {
+test('Bruteforce ignores the same locations', async function (assert) {
   assert.plan(12)
 
   const coordinateList = [
@@ -133,3 +133,96 @@ test('Bruteforce matches the same locations', async function (assert) {
   assert.ok('match' in matchedList[3], 'should have a match');
   assert.equal(matchedList[3].match, 'The Statue of Liberty', 'Chicago should be closer to the Statue of Liberty');
 })
+
+test('DelaunayMethod can find matches', async function (assert) {
+  assert.plan(6)
+
+  const coordinateList = [
+    {
+      name: 'The Statue of Liberty',
+      latitude: 40.6892,
+      longitude: -74.0445
+    },
+    {
+      name: 'Calgary, AB',
+      latitude: 51.043002,
+      longitude: -114.063049
+    },
+    {
+      name: 'Chicago, IL',
+      latitude: 42.065405,
+      longitude: -87.676026
+    },
+    {
+      name: 'Springfield, IL',
+      latitude: 43.065405,
+      longitude: -84.676026
+    },
+    {
+      name: 'Springfield, WA',
+      latitude: 62.065405,
+      longitude: -91.676026
+    },
+  ]
+
+  const matchedList = matcher.delaunayMethod(coordinateList)
+
+  assert.equal(matchedList[0].name, 'The Statue of Liberty', 'should still be the name of the first entry');
+  assert.ok('match' in matchedList[0], 'should have a match');
+  assert.ok('match' in matchedList[1], 'should have a match');
+  assert.ok('match' in matchedList[2], 'should have a match');
+  assert.ok('match' in matchedList[3], 'should have a match');
+  assert.ok('match' in matchedList[4], 'should have a match');
+
+  assert.end()
+})
+
+test('DelaunayMethod should be faster than bruteforce (on larger lists of coordinates(50+))', async function (assert) {
+
+  const coordinateList = []
+
+  for (let i=0; i<100; i++) {
+    coordinateList.push({
+      name: 'Nope',
+      latitude: Math.random()*180,
+      longitude: Math.random()*180*-1
+    })
+  }
+
+  let tDelaunay, tBruteforce, tBruteforceCache
+  let t0, t1
+  const iterations = 100
+
+  t0 = Date.now()
+  for (let i = 0; i < iterations; i++) {
+    let delaunayMatches = matcher.delaunayMethod(coordinateList)
+  }
+  t1 = Date.now()
+  tDelaunay = t1 - t0
+
+  process.env.DISTANCE_CACHE_ENABLED = false
+  t0 = Date.now()
+  for (let i = 0; i < iterations; i++) {
+    let bruteforceMatches = matcher.bruteforce(coordinateList)
+  }
+  t1 = Date.now()
+  tBruteforce = t1 - t0
+
+  process.env.DISTANCE_CACHE_ENABLED = true
+  t0 = Date.now()
+  for (let i = 0; i < iterations; i++) {
+    let bruteforceMatches = matcher.bruteforce(coordinateList)
+  }
+  t1 = Date.now()
+  tBruteforceCache = t1 - t0
+
+  //console.log('bruteforce took', tBruteforce)
+  //console.log('bruteforce(cache) took', tBruteforceCache)
+  //console.log('delaunay took', tDelaunay)
+
+  assert.notEqual(tBruteforce, tDelaunay, 'should not have the same time')
+  assert.ok(tDelaunay < tBruteforce, 'expect delaunay to be faster than bruteforce')
+
+  assert.end()
+})
+

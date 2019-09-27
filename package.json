@@ -15,6 +15,7 @@
     "tape": "^4.11.0"
   },
   "dependencies": {
+    "d3-geo-voronoi": "^1.6.0",
     "dotenv": "^8.1.0",
     "haversine": "^1.1.1",
     "lru-cache": "^5.1.1",

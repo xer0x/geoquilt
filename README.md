@@ -1,6 +1,6 @@
 # GeoQuilt
 
-This is a simple exmaple of an API that looks up geo-cordinates of locations, and finds nearby locations.
+This is a simple example of an API that looks up geo-cordinates of locations, and finds nearby locations.
 
 ## Design choices
 
