@@ -85,7 +85,7 @@ test('Bruteforce matches three locations', async function (assert) {
   assert.equal(matchedList[2].match, 'The Statue of Liberty', 'Chicago should be closer to the Statue of Liberty');
 })
 
-test('Bruteforce matches the same locations', async function (assert) {
+test('Bruteforce ignores the same locations', async function (assert) {
   assert.plan(12)
 
   const coordinateList = [
@@ -133,3 +133,39 @@ test('Bruteforce matches the same locations', async function (assert) {
   assert.ok('match' in matchedList[3], 'should have a match');
   assert.equal(matchedList[3].match, 'The Statue of Liberty', 'Chicago should be closer to the Statue of Liberty');
 })
+
+test('DelaunayMethod can find matches', async function (assert) {
+  assert.plan(10)
+
+  const coordinateList = [
+    {
+      name: 'The Statue of Liberty',
+      latitude: 40.6892,
+      longitude: -74.0445
+    },
+    {
+      name: 'Calgary, AB',
+      latitude: 51.043002,
+      longitude: -114.063049
+    },
+    {
+      name: 'Chicago, IL',
+      latitude: 42.065405,
+      longitude: -87.676026
+    },
+    {
+      name: 'Springfield, IL',
+      latitude: 43.065405,
+      longitude: -84.676026
+    },
+    {
+      name: 'Springfield, WA',
+      latitude: 62.065405,
+      longitude: -91.676026
+    },
+  ]
+
+  const matchedList = matcher.delaunayMethod(coordinateList)
+
+})
+
