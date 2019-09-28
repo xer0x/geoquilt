@@ -1,15 +1,14 @@
 # GeoQuilt
 
-This is a simple example of an API that looks up geo-cordinates of locations, and finds nearby locations.
+This is a simple example of an API that takes as input a list of locations. It looks up the geo-cordinates of those locations, and then matches each location with the closest other location to it.
 
 ## Design choices
 
 - Geocoding uses the Google Maps API because it is easy to setup. The npm module works, but I might want to build something different because Github mentions some security issues.
-- Deployment uses Zeit similarly because it is fast to get a basic API running.
+- Deployment uses Zeit similarly because it is fast to get a basic API running.\
+- The algorithm to find the closest points uses a Delaunay Triangulation. It runs in O(nlogn) and is faster than bruteforce methods for larger datasets. The implementation uses [d3-geo-voronoi](https://github.com/Fil/d3-geo-voronoi) to construct the actual triangulation, and get the nearest neighbours.
 
 ## Usage
-
-
 
 ```shell
 
